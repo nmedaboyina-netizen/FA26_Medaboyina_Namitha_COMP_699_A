@@ -529,54 +529,9 @@ They are not proof that a particular sequence actually occurred.
 
 The application will not determine guilt, innocence, or evidence reliability.
 
-## 18. Current Implementation Status
 
-Update this section as development progresses.
 
-| Component | Status |
-|---|---|
-| Project source tree | Planned structure; verify files in the repository |
-| Flask application | Verify startup and browser access |
-| SQLite integration | Verify database creation and persistence |
-| Evidence-event management | Implement and test |
-| Constraint analysis | Implement and test |
-| Conflict reporting | Implement and test |
-| Alternative timeline generation | Planned |
-| CSV and JSON import/export | Planned |
-| NIBRS transformation | Planned |
-| Optional machine learning | Optional future extension |
-| Automated tests | Run and record actual results |
 
-Do not mark a component complete until its code has been implemented and
-tested.
 
-## 19. Privacy and Responsible Use
 
-Use synthetic or publicly available data for demonstrations and development.
-Do not commit confidential case files, personal records, credentials, or
-other sensitive information to the repository.
 
-The application is intended to support computational review of timeline
-consistency. Investigators must evaluate the results in context and must not
-treat a software-generated conflict or alternative timeline as a definitive
-conclusion about real-world events.
-
-## 20. Contribution and Maintenance
-
-When adding a feature:
-
-1. Keep routes, services, algorithms, and database code separated.
-2. Validate user inputs before saving or analyzing records.
-3. Add tests for new behavior.
-4. Update `requirements.txt` when dependencies change.
-5. Update this README when installation or execution steps change.
-6. Use synthetic data for reproducible testing.
-7. Confirm that original evidence is not overwritten by generated alternatives.
-
-## 21. License and Project Status
-
-This is an academic software project. Add a license file if a specific
-open-source license is selected or required by the course.
-
-The implementation status must reflect the actual files, features, and tests
-available in the repository.
