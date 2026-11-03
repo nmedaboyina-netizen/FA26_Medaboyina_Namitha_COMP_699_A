@@ -477,57 +477,59 @@ the detailed event timestamps or relationships needed for constraint analysis.
 Synthetic records will supplement scenarios that the public data cannot
 represent.
 
-## 16. Development Plan
+## Current Design and Development Status
 
-### Week 1: Implementation Foundation
+### Project Design
+- The application is designed as a web-based forensic timeline analysis system.
+- Python is the main programming language.
+- Flask is used as the web application framework.
+- HTML and CSS are used to develop the user interface.
+- No custom JavaScript is used.
+- SQLite is used for storing evidence events, relationships, and analysis results.
+- The application follows a modular structure with separate routes, services, algorithms, and database components.
+- VS Code is used as the development environment.
 
-- Organize the initial source tree.
-- Create the application configuration and dependency files.
-- Establish the Flask execution foundation.
-- Add initial database setup code and schema.
-- Implement an initial executable operation or algorithm.
-- Document setup and verify the current implementation.
+### Development Progress
+- Created the initial project source structure.
+- Configured the Flask application and application routes.
+- Established SQLite database connectivity and database schema.
+- Developed the main dashboard.
+- Implemented the evidence event entry form.
+- Implemented evidence event listing, editing, and deletion.
+- Added input validation for event descriptions, timestamps, time ranges, locations, and durations.
+- Developed functionality for defining BEFORE relationships between evidence events.
+- Implemented initial temporal constraint checking.
+- Added graph-based event relationship handling using NetworkX.
+- Developed initial timeline consistency analysis.
+- Added conflict reporting functionality.
+- Implemented initial alternative event ordering.
+- Added CSV and JSON import and export functionality in the source code.
+- Created synthetic datasets for consistent and conflicting event scenarios.
+- Added automated test files using pytest.
+- Corrected the Flask template directory configuration so that the dashboard loads successfully.
+- Successfully launched the application locally using Flask.
 
-### Week 2: Core Application Foundation
+### Current Testing Status
+- Dashboard loading has been verified in the browser.
+- Evidence event management pages are available.
+- The analysis results page has been displayed successfully.
+- An analysis run with two evidence events was completed.
+- The displayed analysis reported two events and zero ordering relationships.
+- Relationship-based consistency checking still requires verification.
+- Conflict detection requires testing with overlapping event times and a defined BEFORE relationship.
+- Automated test results have not yet been confirmed.
 
-- Complete Flask route registration and shared templates.
-- Complete SQLite initialization and database operations.
-- Implement evidence-event creation, listing, editing, and deletion.
-- Add input validation for timestamps and time ranges.
-- Implement initial event-ordering constraints.
-- Add preliminary conflict reporting.
-- Create synthetic test cases and automated tests.
-
-### Later Development
-
-- Expand temporal and location constraint checking.
-- Integrate NetworkX graph operations.
-- Improve conflict explanations.
-- Implement alternative timeline generation.
-- Add CSV and JSON import/export.
-- Process selected NIBRS records.
-- Improve timeline visualization and reports.
-- Consider an optional event-description classifier.
-- Test the application against larger synthetic datasets.
-
-## 17. Known Limitations
-
-The system's conclusions depend on the quality of the recorded data and the
-constraints implemented in the application.
-
-Potential limitations include:
-
-- Uncertain or incomplete timestamps.
-- Missing or ambiguous location information.
-- Incomplete event relationships.
-- Complex constraints that may require substantial search.
-- Large numbers of possible alternative timelines.
-- Differences between public dataset fields and the application's event model.
-
-Alternative timelines represent solutions to the encoded constraints.
-They are not proof that a particular sequence actually occurred.
-
-The application will not determine guilt, innocence, or evidence reliability.
+### Remaining Development Work
+- Complete testing of BEFORE relationships.
+- Verify conflict detection using predefined test scenarios.
+- Improve alternative timeline presentation and validation.
+- Develop a complete timeline visualization.
+- Improve synthetic dataset loading and scenario testing.
+- Implement NIBRS dataset transformation.
+- Improve analysis reports and conflict explanations.
+- Complete and verify all automated tests.
+- Confirm that generated alternative timelines never modify original evidence records.
+- Review application performance and input validation.
 
 
 
