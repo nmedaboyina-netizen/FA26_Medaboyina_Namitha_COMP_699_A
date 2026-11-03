@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}<h2>Analysis #{{run.analysis_id}}</h2>
+<p><b>Status:</b> {{run.status}}</p><p>{{run.summary}}</p><h3>Conflicts</h3>
+{% if conflicts %}<ul>{% for c in conflicts %}<li>{{c.explanation}}</li>{% endfor %}</ul>
+{% else %}<p>No violations were found for the supported rules.</p>{% endif %}
+<h3>Candidate alternative event orders</h3>
+{% if alternatives %}<ol>{% for order in alternatives %}<li>{{ order|join(' → Event #') }}</li>{% endfor %}</ol>
+<p>Candidate orderings do not change original evidence records.</p>
+{% else %}<p>No alternatives were generated. The graph may contain a cycle or exceed the current search limit.</p>{% endif %}
+<a href="{{ url_for('dashboard.index') }}">Dashboard</a>{% endblock %}

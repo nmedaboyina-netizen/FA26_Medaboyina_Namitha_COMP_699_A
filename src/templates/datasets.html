@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block content %}<h2>Data Import and Export</h2>
+<p>CSV required columns: description, start_time, end_time, location, duration_minutes. Optional: source_type.</p>
+<form method="post" enctype="multipart/form-data" action="{{ url_for('datasets.import_data') }}" class="panel">
+<input type="file" name="file" accept=".csv,.json" required><button>Import file</button></form>
+<p><a class="button" href="{{ url_for('datasets.export_data',kind='csv') }}">Export CSV</a>
+<a class="button" href="{{ url_for('datasets.export_data',kind='json') }}">Export JSON</a></p>{% endblock %}

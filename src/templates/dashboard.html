@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<h2>Dashboard</h2><p>Manage evidence events and check their defined ordering constraints.</p>
+<p><b>{{ events|length }}</b> evidence events &nbsp; <b>{{ relationships|length }}</b> ordering rules</p>
+<p><a class="button" href="{{ url_for('events.add') }}">Add event</a></p>
+<form method="post" action="{{ url_for('analysis.run') }}"><button>Run timeline analysis</button></form>
+<h3>Evidence events</h3>{% if events %}<table><tr><th>ID</th><th>Description</th><th>Start</th><th>End</th><th>Location</th></tr>
+{% for e in events %}<tr><td>{{e.event_id}}</td><td>{{e.description}}</td><td>{{e.start_time}}</td><td>{{e.end_time}}</td><td>{{e.location}}</td></tr>{% endfor %}</table>
+{% else %}<p>No events have been added.</p>{% endif %}{% endblock %}
