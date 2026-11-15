@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block content %}<h2>Evidence Events</h2>
+<p><a class="button" href="{{ url_for('events.add') }}">Add event</a></p>
+{% if events %}<table><tr><th>ID</th><th>Description</th><th>Start</th><th>End</th><th>Location</th><th>Duration</th><th>Actions</th></tr>
+{% for e in events %}<tr><td>{{e.event_id}}</td><td>{{e.description}}</td><td>{{e.start_time}}</td><td>{{e.end_time}}</td><td>{{e.location}}</td><td>{{e.duration_minutes}}</td><td>
+<a href="{{ url_for('events.edit',event_id=e.event_id) }}">Edit</a>
+<form class="inline" method="post" action="{{ url_for('events.delete',event_id=e.event_id) }}"><button class="danger">Delete</button></form></td></tr>{% endfor %}</table>
+{% else %}<p>No events found.</p>{% endif %}{% endblock %}
