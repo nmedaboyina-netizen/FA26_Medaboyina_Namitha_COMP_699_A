@@ -1,8 +1,38 @@
-{% extends "base.html" %}{% block content %}
-<h2>Dashboard</h2><p>Manage evidence events and check their defined ordering constraints.</p>
-<p><b>{{ events|length }}</b> evidence events &nbsp; <b>{{ relationships|length }}</b> ordering rules</p>
-<p><a class="button" href="{{ url_for('events.add') }}">Add event</a></p>
-<form method="post" action="{{ url_for('analysis.run') }}"><button>Run timeline analysis</button></form>
-<h3>Evidence events</h3>{% if events %}<table><tr><th>ID</th><th>Description</th><th>Start</th><th>End</th><th>Location</th></tr>
-{% for e in events %}<tr><td>{{e.event_id}}</td><td>{{e.description}}</td><td>{{e.start_time}}</td><td>{{e.end_time}}</td><td>{{e.location}}</td></tr>{% endfor %}</table>
-{% else %}<p>No events have been added.</p>{% endif %}{% endblock %}
+{% extends "base.html" %}
+{% block title %}Dashboard | Forensic Timeline Analyzer{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><p class="eyebrow">WEEK 3 · INITIAL WORKING SYSTEM</p><h2>Forensic Timeline Dashboard</h2>
+  <p>Record evidence events, define ordering constraints, and check whether the recorded timeline satisfies those rules.</p></div>
+  <a class="button" href="{{ url_for('events.add') }}">＋ Add evidence event</a>
+</section>
+<div class="stats">
+  <div class="stat"><strong>{{ events|length }}</strong><span>Evidence events</span></div>
+  <div class="stat"><strong>{{ relationships|length }}</strong><span>BEFORE constraints</span></div>
+  <div class="stat"><strong>{{ latest.status if latest else 'Not run' }}</strong><span>Latest analysis</span></div>
+</div>
+<section class="panel wide">
+  <h3>End-to-end workflow</h3>
+  <ol class="workflow"><li>Add events</li><li>Define BEFORE rules</li><li>Run analysis</li><li>Review results</li></ol>
+  <div class="actions">
+    <a class="button" href="{{ url_for('events.list_page') }}">Manage events</a>
+    <a class="button secondary" href="{{ url_for('constraints.index') }}">Manage constraints</a>
+    <form method="post" action="{{ url_for('analysis.run') }}"><button>Run timeline analysis</button></form>
+  </div>
+</section>
+{% if not events %}
+<section class="panel wide">
+  <h3>Try the working demonstration</h3>
+  <p>Load three synthetic events and two valid ordering rules. Then run analysis. You can edit an event to create a conflict and run analysis again.</p>
+  <form method="post" action="{{ url_for('demo.load_demo') }}"><button>Load sample demonstration data</button></form>
+</section>
+{% endif %}
+<section class="panel wide">
+  <h3>Current evidence events</h3>
+  {% if events %}
+  <div class="table-wrap"><table><thead><tr><th>ID</th><th>Description</th><th>Start</th><th>End</th><th>Location</th><th>Source</th></tr></thead><tbody>
+  {% for e in events %}<tr><td>#{{e.event_id}}</td><td>{{e.description}}</td><td>{{e.start_time}}</td><td>{{e.end_time}}</td><td>{{e.location}}</td><td>{{e.source_type}}</td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<p class="muted">No evidence events yet. Add an event or load the sample demonstration data.</p>{% endif %}
+</section>
+{% endblock %}
