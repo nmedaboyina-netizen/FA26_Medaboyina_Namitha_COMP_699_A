@@ -1,17 +1,7 @@
-{% extends "base.html" %}{% block title %}Constraints | Forensic Timeline Analyzer{% endblock %}
-{% block content %}<h2>Event Ordering Constraints</h2>
-<p>A <b>BEFORE</b> rule means Event A must finish at or before Event B starts. The rule is checked against the event timestamps during analysis.</p>
-<section class="panel">
-<h3>Add a BEFORE constraint</h3>
-{% if events|length >= 2 %}
-<form method="post" action="{{ url_for('constraints.add_before_route') }}" class="form-grid">
-<label>First event (must happen first)<select name="event_a" required>{% for e in events %}<option value="{{e.event_id}}">#{{e.event_id}} — {{e.description}}</option>{% endfor %}</select></label>
-<label>Second event (must happen later)<select name="event_b" required>{% for e in events %}<option value="{{e.event_id}}">#{{e.event_id}} — {{e.description}}</option>{% endfor %}</select></label>
-<label class="full">Notes (optional)<input name="description" maxlength="250" placeholder="Reason for this ordering rule"></label>
-<div class="full"><button>Save BEFORE rule</button></div></form>
-{% else %}<p class="muted">Add at least two evidence events before creating a relationship.</p>{% endif %}
-</section>
-<section class="panel wide"><h3>Saved relationships</h3>
-{% if relationships %}<div class="table-wrap"><table><thead><tr><th>ID</th><th>First event</th><th>Second event</th><th>Rule</th><th>Notes</th><th></th></tr></thead><tbody>
-{% for r in relationships %}<tr><td>{{r.relationship_id}}</td><td>#{{r.event_id_1}} — {{r.event_a}}</td><td>#{{r.event_id_2}} — {{r.event_b}}</td><td>{{r.relationship_type}}</td><td>{{r.description}}</td><td><form method="post" action="{{url_for('constraints.delete',relationship_id=r.relationship_id)}}"><button class="danger small">Delete</button></form></td></tr>{% endfor %}
-</tbody></table></div>{% else %}<p class="muted">No ordering constraints defined.</p>{% endif %}</section>{% endblock %}
+{% extends "base.html" %}{% block content %}<h2>Evidence Events</h2>
+<p><a class="button" href="{{ url_for('events.add') }}">Add event</a></p>
+{% if events %}<table><tr><th>ID</th><th>Description</th><th>Start</th><th>End</th><th>Location</th><th>Duration</th><th>Actions</th></tr>
+{% for e in events %}<tr><td>{{e.event_id}}</td><td>{{e.description}}</td><td>{{e.start_time}}</td><td>{{e.end_time}}</td><td>{{e.location}}</td><td>{{e.duration_minutes}}</td><td>
+<a href="{{ url_for('events.edit',event_id=e.event_id) }}">Edit</a>
+<form class="inline" method="post" action="{{ url_for('events.delete',event_id=e.event_id) }}"><button class="danger">Delete</button></form></td></tr>{% endfor %}</table>
+{% else %}<p>No events found.</p>{% endif %}{% endblock %}
