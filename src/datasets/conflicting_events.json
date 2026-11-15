@@ -1,0 +1,16 @@
+[
+  {
+    "description": "Event A",
+    "start_time": "2026-01-10T09:00",
+    "end_time": "2026-01-10T09:30",
+    "location": "A",
+    "duration_minutes": 30
+  },
+  {
+    "description": "Event B",
+    "start_time": "2026-01-10T09:20",
+    "end_time": "2026-01-10T09:40",
+    "location": "B",
+    "duration_minutes": 20
+  }
+]

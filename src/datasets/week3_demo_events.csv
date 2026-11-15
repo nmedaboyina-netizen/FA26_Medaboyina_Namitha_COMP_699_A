@@ -1,0 +1,4 @@
+description,start_time,end_time,location,duration_minutes,source_type
+Witness observes vehicle,2026-01-10T09:00,2026-01-10T09:10,North entrance,10,Witness
+Vehicle enters building,2026-01-10T09:20,2026-01-10T09:30,Main entrance,10,Surveillance
+Vehicle leaves building,2026-01-10T09:45,2026-01-10T09:55,South exit,10,Surveillance
