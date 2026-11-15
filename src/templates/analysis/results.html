@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Analysis Results | Forensic Timeline Analyzer{% endblock %}
+{% block content %}
+<div class="result-heading"><div><p class="eyebrow">ANALYSIS RUN #{{run.analysis_id}}</p><h2>Timeline Analysis Results</h2></div><span class="status {{run.status|lower}}">{{run.status}}</span></div>
+<p>{{run.summary}}</p>
+<div class="stats"><div class="stat"><strong>{{events|length}}</strong><span>Events checked</span></div><div class="stat"><strong>{{relationships|length}}</strong><span>Rules checked</span></div><div class="stat"><strong>{{conflicts|length}}</strong><span>Potential conflicts</span></div></div>
+<section class="panel wide"><h3>Conflict details</h3>
+{% if conflicts %}<ul class="conflicts">{% for c in conflicts %}<li><b>Events #{{c.event_id_1}} and #{{c.event_id_2}}</b><p>{{c.explanation}}</p></li>{% endfor %}</ul>
+{% else %}<p class="success-text">No violations were found for the supported BEFORE rules and graph-cycle check.</p>{% endif %}</section>
+<section class="panel wide"><h3>Candidate alternative event orders</h3>
+{% if alternatives %}<p>These are topological orderings that satisfy the saved BEFORE relationships. They are candidate event sequences, not changes to the stored evidence timestamps.</p><ol>{% for order in alternatives %}<li>{% for event_id in order %}<span class="order-chip">#{{event_id}} — {{event_names.get(event_id, 'Event')}}</span>{% if not loop.last %}<span class="muted"> → </span>{% endif %}{% endfor %}</li>{% endfor %}</ol>
+{% elif run.status == 'INCONSISTENT' %}<p>No alternative order is displayed because the current analysis found conflicts. Review the rules or event timestamps, correct the records if appropriate, and run the analysis again.</p>
+{% else %}<p>No alternative order was generated. The graph may exceed the current nine-event search limit.</p>{% endif %}
+<p class="note">Original evidence records are not modified by analysis or alternative-order generation.</p></section>
+<div class="actions"><a class="button" href="{{url_for('dashboard.index')}}">Dashboard</a><a class="button secondary" href="{{url_for('events.list_page')}}">Review evidence</a><form method="post" action="{{url_for('analysis.run')}}"><button>Run analysis again</button></form></div>
+{% endblock %}
