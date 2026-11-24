@@ -1,6 +1,4 @@
 import json
-
-
 def add_event(client, description, start, end):
     return client.post("/events/add", data={
         "description": description, "start_time": start, "end_time": end,
