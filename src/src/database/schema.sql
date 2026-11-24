@@ -22,7 +22,10 @@ CREATE TABLE IF NOT EXISTS analysis_runs (
  analysis_id INTEGER PRIMARY KEY AUTOINCREMENT,
  analysis_time TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  status TEXT NOT NULL,
- summary TEXT NOT NULL
+ summary TEXT NOT NULL,
+ event_snapshot TEXT NOT NULL DEFAULT '[]',
+ relationship_snapshot TEXT NOT NULL DEFAULT '[]',
+ alternatives_snapshot TEXT NOT NULL DEFAULT '[]'
 );
 CREATE TABLE IF NOT EXISTS analysis_conflicts (
  conflict_id INTEGER PRIMARY KEY AUTOINCREMENT,
