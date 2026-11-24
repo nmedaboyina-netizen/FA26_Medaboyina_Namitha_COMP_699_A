@@ -21,6 +21,11 @@ def init_db():
     schema = Path(__file__).with_name("schema.sql").read_text(encoding="utf-8")
     db = get_db()
     db.executescript(schema)
+    # Add snapshot columns to databases created by the earlier version.
+    columns = {row["name"] for row in db.execute("PRAGMA table_info(analysis_runs)").fetchall()}
+    for column in ("event_snapshot", "relationship_snapshot", "alternatives_snapshot"):
+        if column not in columns:
+            db.execute(f"ALTER TABLE analysis_runs ADD COLUMN {column} TEXT NOT NULL DEFAULT '[]'")
     db.commit()
 
 def init_app(app):
