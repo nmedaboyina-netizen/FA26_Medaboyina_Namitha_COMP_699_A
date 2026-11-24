@@ -11,5 +11,5 @@
 {% elif run.status == 'INCONSISTENT' %}<p>No alternative order is displayed because the current analysis found conflicts. Review the rules or event timestamps, correct the records if appropriate, and run the analysis again.</p>
 {% else %}<p>No alternative order was generated. The graph may exceed the current nine-event search limit.</p>{% endif %}
 <p class="note">Original evidence records are not modified by analysis or alternative-order generation.</p></section>
-<div class="actions"><a class="button" href="{{url_for('dashboard.index')}}">Dashboard</a><a class="button secondary" href="{{url_for('events.list_page')}}">Review evidence</a><form method="post" action="{{url_for('analysis.run')}}"><button>Run analysis again</button></form></div>
+<div class="actions"><a class="button secondary" href="{{ url_for('analysis.export', analysis_id=run.analysis_id) }}">Download analysis JSON</a><a class="button" href="{{url_for('dashboard.index')}}">Dashboard</a><a class="button secondary" href="{{url_for('events.list_page')}}">Review evidence</a><form method="post" action="{{url_for('analysis.run')}}"><button>Run analysis again</button></form></div>
 {% endblock %}
